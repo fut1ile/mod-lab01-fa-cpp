@@ -3,11 +3,8 @@
 #include <cstring>
 #include <iostream>
 #include <string>
-#include <windows.h>
 
 int main() {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
 
     std::cout << "Задача №1" << std::endl;
 
