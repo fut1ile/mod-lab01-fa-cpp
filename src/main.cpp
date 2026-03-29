@@ -1,11 +1,10 @@
 // Copyright 2022 UNN-IASR
-#include "fun.h"
 #include <cstring>
 #include <iostream>
 #include <string>
+#include "fun.h"
 
 int main() {
-
     std::cout << "Задача №1" << std::endl;
 
     char test1[] = "hello world test dasdsad";

@@ -90,7 +90,6 @@ unsigned int faStr3(const char* str) {
 
         int wordLength = 0;
 
-        // Подсчитываем символы в слове
         while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' &&
             str[i] != '\n') {
             wordLength++;
