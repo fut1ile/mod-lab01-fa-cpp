@@ -1,6 +1,8 @@
 // Copyright 2022 UNN-IASR
 #include "fun.h"
+#include <cstring>
 #include <iostream>
+#include <string>
 #include <windows.h>
 
 int main() {
