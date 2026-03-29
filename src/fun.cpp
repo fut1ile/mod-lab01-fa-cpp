@@ -17,8 +17,7 @@ unsigned int faStr1(const char* str) {
             }
             inWord = false;
             hasDigit = false;
-        }
-        else {
+        } else {
             inWord = true;
 
             if (c >= '0' && c <= '9') {
