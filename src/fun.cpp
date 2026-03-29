@@ -1,86 +1,110 @@
 // Copyright 2022 UNN-IASR
 #include "fun.h"
-#include <cstring>
-#include <iostream>
-#include <string>
 
-int main() {
+unsigned int faStr1(const char* str) {
+    if (str == nullptr) return 0;
 
-    std::cout << "Задача №1" << std::endl;
+    unsigned int count = 0;
+    bool inWord = false;
+    bool hasDigit = false;
 
-    char test1[] = "hello world test dasdsad";
-    std::cout << "Строка: \"" << test1 << "\"" << std::endl;
-    std::cout << "Слов без цифр: " << faStr1(test1) << std::endl
-        << std::endl;
+    for (int i = 0; str[i] != '\0'; i++) {
+        char c = str[i];
 
-    char test2[] = "abc123 def 456 ghi";
-    std::cout << "Строка: \"" << test2 << "\"" << std::endl;
-    std::cout << "Слов без цифр: " << faStr1(test2) << std::endl
-        << std::endl;
+        if (c == ' ' || c == '\t' || c == '\n') {
+            if (inWord && !hasDigit) {
+                count++;
+            }
+            inWord = false;
+            hasDigit = false;
+        }
+        else {
+            inWord = true;
 
-    std::cout << "Задача №2" << std::endl;
+            if (c >= '0' && c <= '9') {
+                hasDigit = true;
+            }
+        }
+    }
 
-    char test3[] = "Hello world Java program";
-    std::cout << "Строка: \"" << test3 << "\"" << std::endl;
-    std::cout << "Слов с заглавной буквой и строчными: "
-        << faStr2(test3) << std::endl << std::endl;
+    if (inWord && !hasDigit) {
+        count++;
+    }
 
-    char test4[] = "Cat Dog123 Fish Tree APPLE";
-    std::cout << "Строка: \"" << test4 << "\"" << std::endl;
-    std::cout << "Слов с заглавной буквой и строчными: "
-        << faStr2(test4) << std::endl << std::endl;
+    return count;
+}
 
-    std::cout << "Задача №3" << std::endl;
+unsigned int faStr2(const char* str) {
+    if (str == 0) return 0;
 
-    char test5[] = "hello world";
-    std::cout << "Строка: \"" << test5 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test5) << std::endl
-        << std::endl;
+    int result = 0;
+    int i = 0;
 
-    char test6[] = "a bb ccc dddd";
-    std::cout << "Строка: \"" << test6 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test6) << std::endl
-        << std::endl;
+    while (str[i] != '\0') {
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n') {
+            i++;
+        }
 
-    char test7[] = "   one   two   three   ";
-    std::cout << "Строка: \"" << test7 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test7) << std::endl
-        << std::endl;
+        if (str[i] == '\0') break;
 
-    char test8[] = "";
-    std::cout << "Строка: (пустая)" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test8) << std::endl
-        << std::endl;
+        char firstChar = str[i];
+        int isGood = 1;
 
-    char test9[] = "     ";
-    std::cout << "Строка: (только пробелы)" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test9) << std::endl
-        << std::endl;
+        if (!(firstChar >= 'A' && firstChar <= 'Z')) {
+            isGood = 0;
+        }
 
-    char test10[] = "programming";
-    std::cout << "Строка: \"" << test10 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test10) << std::endl
-        << std::endl;
+        if (str[i] != '\0') {
+            i++;
+        }
 
-    char test11[] = "abc 123 !@#";
-    std::cout << "Строка: \"" << test11 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test11) << std::endl
-        << std::endl;
+        while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' &&
+            str[i] != '\n') {
+            if (!(str[i] >= 'a' && str[i] <= 'z')) {
+                isGood = 0;
+            }
+            i++;
+        }
 
-    char test12[] = "a bc def";
-    std::cout << "Строка: \"" << test12 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test12) << std::endl
-        << std::endl;
+        if (isGood == 1) {
+            result++;
+        }
+    }
 
-    char test13[] = "a bc defg";
-    std::cout << "Строка: \"" << test13 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test13) << std::endl
-        << std::endl;
+    return result;
+}
 
-    char test14[] = "a bc defgh";
-    std::cout << "Строка: \"" << test14 << "\"" << std::endl;
-    std::cout << "Средняя длина слова: " << faStr3(test14) << std::endl
-        << std::endl;
+unsigned int faStr3(const char* str) {
+    if (str == 0) return 0;
 
-    return 0;
+    int totalLength = 0;
+    int wordCount = 0;
+    int i = 0;
+
+    while (str[i] != '\0') {
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n') {
+            i++;
+        }
+
+        if (str[i] == '\0') break;
+
+        int wordLength = 0;
+
+        // Подсчитываем символы в слове
+        while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' &&
+            str[i] != '\n') {
+            wordLength++;
+            i++;
+        }
+
+        totalLength += wordLength;
+        wordCount++;
+    }
+
+    if (wordCount == 0) return 0;
+
+    double average = static_cast<double>(totalLength) / wordCount;
+    unsigned int result = static_cast<unsigned int>(average + 0.5);
+
+    return result;
 }
